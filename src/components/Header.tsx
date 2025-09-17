@@ -7,13 +7,13 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Leadership', href: '#leadership' },
-    { name: 'Careers', href: '#careers' },
-    { name: 'Contact Us', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Leadership', href: '/leadership' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Contact Us', href: '/contact' },
   ];
 
   return (
@@ -64,9 +64,6 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              Download Profile
-            </Button>
             <Button variant="hero" size="lg">
               Enquire Now
             </Button>
@@ -96,9 +93,6 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" size="sm">
-                  Download Profile
-                </Button>
                 <Button variant="hero" size="lg">
                   Enquire Now
                 </Button>
