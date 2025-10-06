@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageBanner from '@/components/PageBanner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -162,31 +163,10 @@ const ContactUs = () => {
     <div ref={containerRef} className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${weldingBg})` }}
-        >
-          <div className="absolute inset-0 hero-gradient"></div>
-        </div>
-        
-        {/* Railway track gradient banner */}
-        <div className="absolute top-0 left-0 right-0 h-2 railway-gradient"></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="hero-content max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Contact Us
-              <span className="block text-railway-yellow">Let's Connect</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-              Ready to discuss your railway infrastructure needs? 
-              Get in touch with our experts for personalized solutions.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageBanner 
+        title="CONTACT US" 
+        breadcrumbs={[{ label: 'CONTACT US', href: '' }]} 
+      />
 
       {/* Contact Section */}
       <section className="contact-section py-20">

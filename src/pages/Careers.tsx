@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageBanner from '@/components/PageBanner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -227,39 +228,10 @@ const Careers = () => {
     <div ref={containerRef} className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${railwayBg})` }}
-        >
-          <div className="absolute inset-0 hero-gradient"></div>
-        </div>
-        
-        {/* Locomotive silhouette animation */}
-        <div className="locomotive-silhouette absolute bottom-10 -left-32 w-32 h-16 opacity-20">
-          <div className="w-full h-full bg-railway-yellow rounded-lg"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="hero-content max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Join Our Team
-              <span className="block text-railway-yellow">Build the Future</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-              "Work with us to transform the future of Indian Railways. 
-              Be part of a legacy that builds tomorrow's infrastructure today."
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="accent" size="xl">View Openings</Button>
-              <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-navy">
-                Life at Khemchand
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageBanner 
+        title="CAREERS" 
+        breadcrumbs={[{ label: 'CAREERS', href: '' }]} 
+      />
 
       {/* Why Join Us */}
       <section className="py-20 bg-muted">

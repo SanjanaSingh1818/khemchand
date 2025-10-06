@@ -35,6 +35,10 @@ export default {
           DEFAULT: "hsl(var(--navy))",
           foreground: "hsl(var(--navy-foreground))",
         },
+        "banner-navy": {
+          DEFAULT: "hsl(var(--banner-navy))",
+          foreground: "hsl(var(--banner-navy-foreground))",
+        },
         "railway-red": {
           DEFAULT: "hsl(var(--railway-red))",
           foreground: "hsl(var(--railway-red-foreground))",

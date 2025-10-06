@@ -9,42 +9,46 @@ All colors MUST be HSL. Brand colors from logo: green, teal, navy, orange, red, 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 213 48% 24%;
+    --foreground: 222 82% 17%;
 
     --card: 0 0% 100%;
-    --card-foreground: 213 48% 24%;
+    --card-foreground: 222 82% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 213 48% 24%;
+    --popover-foreground: 222 82% 17%;
 
-    /* Primary: Railway Green from logo */
-    --primary: 144 48% 35%;
+    /* Primary: Brand Red #de021c */
+    --primary: 352 99% 44%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 144 48% 30%;
+    --primary-hover: 352 99% 38%;
 
-    /* Secondary: Railway Teal from logo */
-    --secondary: 188 66% 32%;
+    /* Secondary: Deep Navy #022a61 */
+    --secondary: 213 96% 19%;
     --secondary-foreground: 0 0% 100%;
 
     /* Muted: Light grays for backgrounds */
     --muted: 210 40% 98%;
     --muted-foreground: 213 20% 55%;
 
-    /* Accent: Railway Orange from logo */
-    --accent: 22 92% 52%;
+    /* Accent: Brand Red variant */
+    --accent: 352 99% 44%;
     --accent-foreground: 0 0% 100%;
 
-    /* Railway Navy from logo text */
-    --navy: 213 48% 24%;
+    /* Railway Navy #01054d - Dark Navy */
+    --navy: 236 98% 15%;
     --navy-foreground: 0 0% 100%;
 
-    /* Railway Red from logo tracks */
-    --railway-red: 0 74% 50%;
+    /* Banner Navy #022a61 */
+    --banner-navy: 213 96% 19%;
+    --banner-navy-foreground: 0 0% 100%;
+
+    /* Railway Red - Brand color */
+    --railway-red: 352 99% 44%;
     --railway-red-foreground: 0 0% 100%;
 
     /* Railway Yellow from logo accent */
     --railway-yellow: 45 96% 64%;
-    --railway-yellow-foreground: 213 48% 24%;
+    --railway-yellow-foreground: 222 82% 17%;
 
     --destructive: 0 74% 50%;
     --destructive-foreground: 0 0% 100%;
@@ -56,9 +60,9 @@ All colors MUST be HSL. Brand colors from logo: green, teal, navy, orange, red, 
     --radius: 0.75rem;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.95), hsl(var(--secondary) / 0.95));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--railway-red)));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--navy)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.95), hsl(var(--navy) / 0.95));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--banner-navy)));
 
     /* Shadows */
     --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);

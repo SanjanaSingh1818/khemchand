@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageBanner from '@/components/PageBanner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Award, Users, Calendar, TrendingUp } from 'lucide-react';
@@ -87,37 +88,10 @@ const AboutUs = () => {
     <div ref={containerRef} className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${railwayBg})` }}
-        >
-          <div className="absolute inset-0 hero-gradient"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="hero-content max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Building Railways
-              <span className="block text-railway-yellow">Since 1990</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-              Three decades of excellence in railway infrastructure, 
-              driven by innovation and commitment to India's transportation future.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="accent" size="xl">Our Legacy</Button>
-              <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-navy">
-                Leadership Team
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="floating-element absolute top-1/4 right-1/4 w-20 h-20 bg-railway-yellow/20 rounded-full"></div>
-        <div className="floating-element absolute bottom-1/3 left-1/6 w-16 h-16 bg-accent/20 rounded-full"></div>
-      </section>
+      <PageBanner 
+        title="ABOUT US" 
+        breadcrumbs={[{ label: 'ABOUT US', href: '' }]} 
+      />
 
       {/* Company Story Section */}
       <section className="py-20 bg-muted">
