@@ -103,8 +103,7 @@ const Header = () => {
             {/* Enquire Now Button */}
             <div className="hidden lg:block py-2">
               <Button 
-                className="bg-primary hover:bg-primary-hover text-white font-semibold px-6"
-                size="lg"
+                className="bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2"
               >
                 Enquire Now
               </Button>
