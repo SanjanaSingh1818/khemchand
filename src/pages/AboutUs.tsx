@@ -124,8 +124,8 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-20 relative">
+      {/* Timeline Section - Horizontal */}
+      <section className="py-20 relative overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-10"
           style={{ backgroundImage: `url(${railwayBg})` }}
@@ -140,30 +140,30 @@ const AboutUs = () => {
           </div>
 
           <div ref={timelineRef} className="timeline-container relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 railway-gradient"></div>
-            
-            {milestones.map((milestone, index) => (
-              <div 
-                key={milestone.year}
-                className={`timeline-item flex items-center mb-12 ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                }`}
-              >
-                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                  <Card className="shadow-card hover:shadow-elegant transition-smooth">
-                    <CardContent className="p-6">
-                      <div className="text-2xl font-bold text-primary mb-2">{milestone.year}</div>
-                      <h3 className="text-xl font-semibold text-navy mb-2">{milestone.title}</h3>
-                      <p className="text-muted-foreground">{milestone.description}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-                
-                <div className="w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg z-10"></div>
-                
-                <div className="w-1/2"></div>
+            {/* Horizontal Timeline Line */}
+            <div className="relative mb-20">
+              <div className="absolute top-1/2 left-0 right-0 h-1 railway-gradient transform -translate-y-1/2"></div>
+              
+              <div className="flex justify-between items-center relative">
+                {milestones.map((milestone, index) => (
+                  <div key={milestone.year} className="timeline-item flex flex-col items-center" style={{ width: `${100 / milestones.length}%` }}>
+                    {/* Circle Marker */}
+                    <div className="w-6 h-6 bg-primary rounded-full border-4 border-white shadow-lg mb-4 z-10"></div>
+                    
+                    {/* Year */}
+                    <div className="text-2xl font-bold text-primary mb-2">{milestone.year}</div>
+                    
+                    {/* Card */}
+                    <Card className="shadow-card hover:shadow-elegant transition-smooth w-40">
+                      <CardContent className="p-4 text-center">
+                        <h3 className="text-sm font-semibold text-navy mb-1">{milestone.title}</h3>
+                        <p className="text-xs text-muted-foreground">{milestone.description}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>

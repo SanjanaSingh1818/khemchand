@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 import {
   MapPin,
   Phone,
@@ -51,21 +52,44 @@ const Contact = () => {
       return;
     }
 
-    // Simulate form submission
-    toast({
-      title: "Message sent successfully!",
-      description: "We'll get back to you within 24 hours.",
-    });
-
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      subject: '',
-      message: ''
-    });
+    // Send email via EmailJS
+    emailjs.send(
+      'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+    ).then(
+      () => {
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you within 24 hours.",
+        });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          subject: '',
+          message: ''
+        });
+      },
+      (error) => {
+        console.error('EmailJS error:', error);
+        toast({
+          title: "Failed to send message",
+          description: "Please try again or contact us directly.",
+          variant: "destructive"
+        });
+      }
+    );
   };
 
   const contactInfo = [
@@ -284,46 +308,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Careers Section */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-navy mb-4">Join Our Team</h3>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Work with us to transform the future of Indian Railways. 
-              Explore current opportunities and grow your career in railway engineering.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-3xl p-8 shadow-elegant">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {careers.map((career, index) => (
-                <div
-                  key={career.position}
-                  className="border border-border rounded-xl p-6 hover:border-primary transition-smooth group"
-                >
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Briefcase className="h-5 w-5 text-primary" />
-                    <span className="text-sm text-primary font-medium">{career.type}</span>
-                  </div>
-                  <h4 className="text-lg font-semibold text-navy mb-2 group-hover:text-primary transition-smooth">
-                    {career.position}
-                  </h4>
-                  <p className="text-muted-foreground text-sm mb-4">{career.department}</p>
-                  <Button variant="outline" size="sm" className="w-full">
-                    Apply Now
-                  </Button>
-                </div>
-              ))}
-            </div>
-            
-            <div className="text-center mt-8">
-              <Button variant="hero" size="lg">
-                <Users className="mr-2 h-5 w-5" />
-                View All Openings
-              </Button>
-            </div>
-          </div>
-        </div>
 
         {/* Map Section */}
         <div className="bg-white rounded-3xl p-8 shadow-elegant">

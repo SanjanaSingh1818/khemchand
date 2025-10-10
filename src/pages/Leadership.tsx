@@ -19,6 +19,10 @@ import {
   Calendar
 } from 'lucide-react';
 import railwayBg from '@/assets/railway-hero-bg.jpg';
+import leader1 from '@/assets/leader-1.jpg';
+import leader2 from '@/assets/leader-2.jpg';
+import leader3 from '@/assets/leader-3.jpg';
+import leader4 from '@/assets/leader-4.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,7 +80,7 @@ const Leadership = () => {
       education: 'B.Tech, IIT Kanpur (1975)',
       experience: '45+ Years',
       expertise: ['Railway Infrastructure', 'Engineering Management', 'Strategic Planning', 'Quality Systems'],
-      avatar: '/api/placeholder/300/300',
+      avatar: leader1,
       bio: 'A visionary leader and IIT Kanpur alumnus who founded Khemchand Group with a mission to transform India\'s railway infrastructure. His extensive experience in engineering and unwavering commitment to quality have been the driving forces behind the company\'s success over three decades.',
       achievements: [
         'Founded Khemchand Group in 1990',
@@ -96,7 +100,7 @@ const Leadership = () => {
       education: 'MBA, United Kingdom',
       experience: '20+ Years',
       expertise: ['International Business', 'Strategic Growth', 'Operations Management', 'Technology Innovation'],
-      avatar: '/api/placeholder/300/300',
+      avatar: leader2,
       bio: 'An accomplished business leader with international exposure and MBA from the UK. He brings global best practices and modern management techniques to drive the company towards new horizons of growth and technological advancement.',
       achievements: [
         'Led international expansion initiatives',
@@ -116,7 +120,7 @@ const Leadership = () => {
       education: 'M.Tech, Civil Engineering',
       experience: '25+ Years',
       expertise: ['Railway Engineering', 'Project Management', 'Quality Assurance', 'Safety Systems'],
-      avatar: '/api/placeholder/300/300',
+      avatar: leader3,
       bio: 'A seasoned railway engineer with deep technical expertise in all aspects of railway infrastructure. His leadership in technical operations ensures that all projects meet the highest standards of quality and safety.',
       achievements: [
         'Led major railway projects',
@@ -136,7 +140,7 @@ const Leadership = () => {
       education: 'CA, MBA Finance',
       experience: '18+ Years',
       expertise: ['Financial Planning', 'Risk Management', 'Corporate Governance', 'Strategic Analysis'],
-      avatar: '/api/placeholder/300/300',
+      avatar: leader4,
       bio: 'A dynamic financial leader who ensures robust financial management and strategic planning. Her expertise in corporate finance and risk management has been instrumental in the company\'s sustained growth.',
       achievements: [
         'Streamlined financial operations',
@@ -243,8 +247,12 @@ const Leadership = () => {
                     <div className="p-8">
                       <div className="flex items-start space-x-6">
                         <div className="relative">
-                          <div className="w-24 h-24 railway-gradient rounded-full flex items-center justify-center">
-                            <Users className="w-12 h-12 text-white" />
+                          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary/20">
+                            <img 
+                              src={leader.avatar} 
+                              alt={leader.name}
+                              className="w-full h-full object-cover"
+                            />
                           </div>
                           <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                             <Award className="w-4 h-4 text-white" />

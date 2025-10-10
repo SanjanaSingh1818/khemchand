@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import emailjs from '@emailjs/browser';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageBanner from '@/components/PageBanner';
@@ -10,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Briefcase, 
   MapPin, 
@@ -23,7 +25,8 @@ import {
   ChevronRight,
   Mail,
   Phone,
-  Upload
+  Upload,
+  Send
 } from 'lucide-react';
 import railwayBg from '@/assets/railway-hero-bg.jpg';
 import weldingBg from '@/assets/welding-bg.jpg';
@@ -32,9 +35,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Careers = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
   const [expandedJob, setExpandedJob] = useState<number | null>(null);
   const [showApplicationForm, setShowApplicationForm] = useState(false);
   const [selectedJob, setSelectedJob] = useState<string>('');
+  const [careerFormData, setCareerFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    position: '',
+    message: ''
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -222,6 +233,61 @@ const Careers = () => {
   const handleApply = (jobTitle: string) => {
     setSelectedJob(jobTitle);
     setShowApplicationForm(true);
+  };
+
+  const handleCareerInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setCareerFormData({
+      ...careerFormData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleCareerSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!careerFormData.name || !careerFormData.email || !careerFormData.message) {
+      toast({
+        title: "Please fill required fields",
+        description: "Name, email, and message are required.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    emailjs.send(
+      'YOUR_SERVICE_ID',
+      'YOUR_CAREER_TEMPLATE_ID',
+      {
+        from_name: careerFormData.name,
+        from_email: careerFormData.email,
+        phone: careerFormData.phone,
+        position: careerFormData.position,
+        message: careerFormData.message,
+      },
+      'YOUR_PUBLIC_KEY'
+    ).then(
+      () => {
+        toast({
+          title: "Application submitted!",
+          description: "We'll review your application and get back to you soon.",
+        });
+        setCareerFormData({
+          name: '',
+          email: '',
+          phone: '',
+          position: '',
+          message: ''
+        });
+      },
+      (error) => {
+        console.error('EmailJS error:', error);
+        toast({
+          title: "Failed to submit",
+          description: "Please try again or email us directly.",
+          variant: "destructive"
+        });
+      }
+    );
   };
 
   return (
@@ -441,22 +507,104 @@ const Careers = () => {
         </div>
       )}
 
-      {/* Call to Action */}
-      <section className="py-20 railway-gradient">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">Ready to Join Our Journey?</h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Don't see the right position? Send us your resume and we'll keep you in mind for future opportunities.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="accent" size="xl">
-              <Mail className="w-5 h-5 mr-2" />
-              Send Resume
-            </Button>
-            <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-navy">
-              <Phone className="w-5 h-5 mr-2" />
-              Contact HR
-            </Button>
+      {/* Career Contact Form */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-navy mb-4">Reach Out for Career Opportunities</h2>
+              <p className="text-xl text-muted-foreground">
+                Don't see the right position? Send us your details and we'll keep you in mind for future opportunities.
+              </p>
+            </div>
+
+            <Card className="shadow-elegant">
+              <CardContent className="p-8">
+                <form onSubmit={handleCareerSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="career-name">Full Name *</Label>
+                      <Input
+                        id="career-name"
+                        name="name"
+                        value={careerFormData.name}
+                        onChange={handleCareerInputChange}
+                        placeholder="Enter your full name"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="career-email">Email Address *</Label>
+                      <Input
+                        id="career-email"
+                        type="email"
+                        name="email"
+                        value={careerFormData.email}
+                        onChange={handleCareerInputChange}
+                        placeholder="Enter your email"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="career-phone">Phone Number</Label>
+                      <Input
+                        id="career-phone"
+                        name="phone"
+                        value={careerFormData.phone}
+                        onChange={handleCareerInputChange}
+                        placeholder="Enter your phone number"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="career-position">Position of Interest</Label>
+                      <Input
+                        id="career-position"
+                        name="position"
+                        value={careerFormData.position}
+                        onChange={handleCareerInputChange}
+                        placeholder="e.g., Railway Engineer"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="career-message">Message / Cover Letter *</Label>
+                    <Textarea
+                      id="career-message"
+                      name="message"
+                      value={careerFormData.message}
+                      onChange={handleCareerInputChange}
+                      placeholder="Tell us about your experience and why you'd like to join our team..."
+                      rows={6}
+                      required
+                    />
+                  </div>
+
+                  <Button type="submit" variant="hero" size="lg" className="w-full">
+                    <Send className="mr-2 h-5 w-5" />
+                    Submit Application
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <a href="mailto:careers@khemchandgroup.com" className="inline-block">
+                <Button variant="outline" size="lg">
+                  <Mail className="w-5 h-5 mr-2" />
+                  careers@khemchandgroup.com
+                </Button>
+              </a>
+              <a href="tel:+911123456789" className="inline-block">
+                <Button variant="outline" size="lg">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Contact HR
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
