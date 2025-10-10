@@ -44,6 +44,7 @@ const Careers = () => {
     email: '',
     phone: '',
     position: '',
+    resumeLink: '',
     message: ''
   });
 
@@ -262,6 +263,7 @@ const Careers = () => {
         from_email: careerFormData.email,
         phone: careerFormData.phone,
         position: careerFormData.position,
+        resume_link: careerFormData.resumeLink,
         message: careerFormData.message,
       },
       'YOUR_PUBLIC_KEY'
@@ -276,6 +278,7 @@ const Careers = () => {
           email: '',
           phone: '',
           position: '',
+          resumeLink: '',
           message: ''
         });
       },
@@ -325,118 +328,7 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Current Openings */}
-      <section className="jobs-section py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy mb-4">Current Openings</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Explore exciting career opportunities across various departments
-            </p>
-          </div>
-
-          <div className="space-y-6 max-w-4xl mx-auto">
-            {jobOpenings.map((job) => (
-              <Card key={job.id} className="job-card shadow-card hover:shadow-elegant transition-smooth">
-                <CardHeader 
-                  className="cursor-pointer"
-                  onClick={() => setExpandedJob(expandedJob === job.id ? null : job.id)}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <CardTitle className="text-navy hover:text-primary transition-colors">
-                          {job.title}
-                        </CardTitle>
-                        <Badge variant="secondary">{job.type}</Badge>
-                      </div>
-                      
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <div className="flex items-center gap-1">
-                          <Briefcase className="w-4 h-4" />
-                          {job.department}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
-                          {job.location}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {job.experience}
-                        </div>
-                      </div>
-                      
-                      <p className="text-muted-foreground">{job.description}</p>
-                    </div>
-                    
-                    <div className="ml-4">
-                      {expandedJob === job.id ? 
-                        <ChevronDown className="w-5 h-5 text-primary" /> : 
-                        <ChevronRight className="w-5 h-5 text-muted-foreground" />
-                      }
-                    </div>
-                  </div>
-                </CardHeader>
-
-                {expandedJob === job.id && (
-                  <CardContent className="pt-0">
-                    <div className="border-t pt-6">
-                      <div className="grid md:grid-cols-3 gap-6">
-                        <div>
-                          <h4 className="font-semibold text-navy mb-3">Requirements</h4>
-                          <ul className="space-y-2 text-sm text-muted-foreground">
-                            {job.requirements.map((req, idx) => (
-                              <li key={idx} className="flex items-start gap-2">
-                                <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                                {req}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-semibold text-navy mb-3">Responsibilities</h4>
-                          <ul className="space-y-2 text-sm text-muted-foreground">
-                            {job.responsibilities.map((resp, idx) => (
-                              <li key={idx} className="flex items-start gap-2">
-                                <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
-                                {resp}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-semibold text-navy mb-3">Benefits</h4>
-                          <ul className="space-y-2 text-sm text-muted-foreground">
-                            {job.benefits.map((benefit, idx) => (
-                              <li key={idx} className="flex items-start gap-2">
-                                <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
-                                {benefit}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-end mt-6 pt-4 border-t">
-                        <Button 
-                          variant="hero" 
-                          onClick={() => handleApply(job.title)}
-                        >
-                          Apply Now
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                )}
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Application Form Modal */}
+      {/* Application Form Modal - Removed Current Openings Section */}
       {showApplicationForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -558,20 +450,36 @@ const Careers = () => {
                         placeholder="Enter your phone number"
                       />
                     </div>
-                    <div>
-                      <Label htmlFor="career-position">Position of Interest</Label>
-                      <Input
-                        id="career-position"
-                        name="position"
-                        value={careerFormData.position}
-                        onChange={handleCareerInputChange}
-                        placeholder="e.g., Railway Engineer"
-                      />
-                    </div>
-                  </div>
+                   <div>
+                     <Label htmlFor="career-position">Position of Interest</Label>
+                     <Input
+                       id="career-position"
+                       name="position"
+                       value={careerFormData.position}
+                       onChange={handleCareerInputChange}
+                       placeholder="e.g., Railway Engineer"
+                     />
+                   </div>
+                 </div>
 
-                  <div>
-                    <Label htmlFor="career-message">Message / Cover Letter *</Label>
+                 <div>
+                   <Label htmlFor="career-resume">Resume Link *</Label>
+                   <Input
+                     id="career-resume"
+                     name="resumeLink"
+                     type="url"
+                     value={careerFormData.resumeLink}
+                     onChange={handleCareerInputChange}
+                     placeholder="Google Drive, Dropbox, or LinkedIn profile link"
+                     required
+                   />
+                   <p className="text-xs text-muted-foreground mt-1">
+                     Please provide a link to your resume (Google Drive, Dropbox, etc.)
+                   </p>
+                 </div>
+
+                 <div>
+                   <Label htmlFor="career-message">Message / Cover Letter *</Label>
                     <Textarea
                       id="career-message"
                       name="message"

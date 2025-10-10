@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageBanner from '@/components/PageBanner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -206,27 +207,10 @@ const Projects = () => {
     <div ref={containerRef} className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${railwayBg})` }}
-        >
-          <div className="absolute inset-0 hero-gradient"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="hero-content max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Our Projects
-              <span className="block text-railway-yellow">Building Tomorrow</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-              Showcase of major railway infrastructure projects that demonstrate our expertise and commitment to excellence.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageBanner 
+        title="OUR PROJECTS" 
+        breadcrumbs={[{ label: 'OUR PROJECTS', href: '' }]} 
+      />
 
       {/* Stats Section */}
       <section className="stats-section py-16 railway-gradient">

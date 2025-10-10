@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import khemchandLogo from '@/assets/khemchand-logo.png';
+import railwayBg from '@/assets/railway-hero-bg.jpg';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -41,13 +42,15 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-navy text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="railway-track absolute top-0 left-0 right-0"></div>
-        <div className="railway-track absolute top-8 left-0 right-0"></div>
-        <div className="railway-track absolute top-16 left-0 right-0"></div>
-      </div>
+    <footer className="relative overflow-hidden text-white">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${railwayBg})` }}
+      ></div>
+      
+      {/* Reddish Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-red-900/80 to-red-800/70"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Main Footer Content */}

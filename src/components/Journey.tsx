@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { Factory, Award, Zap, Search, TrendingUp, Globe, Rocket } from 'lucide-react';
+import { Factory, Award, Zap, Search, Globe, Rocket } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,50 +8,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Journey = () => {
   const journeyRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   const milestones = [
-    { 
-      year: '1990', 
-      title: 'Foundation', 
-      description: 'Company founded by Mr. S. Kumar (IIT Kanpur)',
-      icon: Factory
-    },
-    { 
-      year: '1995', 
-      title: 'Railway Partnership', 
-      description: 'First major contract with Indian Railways',
-      icon: Award
-    },
-    { 
-      year: '2005', 
-      title: 'MBC Sleepers', 
-      description: 'Began manufacturing of MBC Sleepers',
-      icon: Factory
-    },
-    { 
-      year: '2010', 
-      title: 'Flash Butt Welding', 
-      description: 'Advanced welding technology introduced',
-      icon: Zap
-    },
-    { 
-      year: '2015', 
-      title: 'USFD Testing', 
-      description: 'Launched rail testing services',
-      icon: Search
-    },
-    { 
-      year: '2020', 
-      title: 'Modern Leadership', 
-      description: 'Mr. Sandeep Sukhwani brings global expertise',
-      icon: Globe
-    },
-    { 
-      year: '2024', 
-      title: 'Future Vision', 
-      description: 'Expanding horizons for Indian Railways',
-      icon: Rocket
-    }
+    { year: '1990', title: 'Company Founded', description: 'Mr. S. Kumar (IIT Kanpur, 1975) established Khemchand Group' },
+    { year: '1995', title: 'First Major Contract', description: 'Secured first railway sleeper manufacturing contract' },
+    { year: '2000', title: 'Flash Butt Welding', description: 'Introduced advanced welding technology' },
+    { year: '2010', title: 'USFD Testing', description: 'Started Ultrasonic Flaw Detection services' },
+    { year: '2015', title: 'Leadership Expansion', description: 'Mr. Sandeep Sukhwani, MBA UK joined as director' },
+    { year: '2024', title: 'New Horizons', description: '30+ years of excellence in Indian Railways' }
   ];
 
   useEffect(() => {
@@ -64,29 +30,23 @@ const Journey = () => {
           scrollTrigger: {
             trigger: '.journey-title',
             start: 'top 80%',
-            toggleActions: 'play none none reverse'
           }
         }
       );
 
-      const milestoneItems = journeyRef.current?.querySelectorAll('.milestone-item');
-      if (milestoneItems) {
-        gsap.fromTo(milestoneItems,
-          { opacity: 0, x: -30 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            stagger: 0.15,
-            scrollTrigger: {
-              trigger: journeyRef.current,
-              start: 'top 70%',
-              end: 'bottom 30%',
-              toggleActions: 'play none none reverse'
-            }
+      gsap.fromTo('.timeline-item',
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: 'top 80%',
           }
-        );
-      }
+        }
+      );
     }, journeyRef);
 
     return () => ctx.revert();
@@ -99,36 +59,30 @@ const Journey = () => {
           Our Journey
         </h2>
         
-        <div className="relative">
+        <div ref={timelineRef} className="timeline-container relative">
           {/* Horizontal Timeline Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent transform -translate-y-1/2 hidden lg:block" />
-          
-          {/* Timeline Items */}
-          <div className="flex flex-col lg:flex-row lg:justify-between gap-8 lg:gap-4 relative">
-            {milestones.map((milestone, index) => {
-              const Icon = milestone.icon;
-              return (
-                <div 
-                  key={milestone.year}
-                  className="milestone-item flex-1 flex flex-col items-center text-center group"
-                >
-                  {/* Icon Circle */}
-                  <div className="relative z-10 mb-4">
-                    <div className="w-20 h-20 rounded-full bg-white shadow-elegant flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Icon className="h-10 w-10 text-primary" />
-                    </div>
-                    <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping group-hover:animate-none" />
-                  </div>
+          <div className="relative mb-20">
+            <div className="absolute top-1/2 left-0 right-0 h-1 railway-gradient transform -translate-y-1/2 hidden md:block"></div>
+            
+            <div className="flex flex-col md:flex-row justify-between items-center relative gap-8 md:gap-0">
+              {milestones.map((milestone, index) => (
+                <div key={milestone.year} className="timeline-item flex flex-col items-center w-full md:w-auto" style={{ maxWidth: index < milestones.length - 1 ? `${100 / milestones.length}%` : 'auto' }}>
+                  {/* Circle Marker */}
+                  <div className="w-6 h-6 bg-primary rounded-full border-4 border-white shadow-lg mb-4 z-10"></div>
                   
-                  {/* Content Card */}
-                  <div className="bg-white rounded-xl p-6 shadow-card hover:shadow-elegant transition-smooth w-full">
-                    <div className="text-3xl font-bold text-primary mb-2">{milestone.year}</div>
-                    <h3 className="text-xl font-semibold text-navy mb-2">{milestone.title}</h3>
-                    <p className="text-muted-foreground text-sm">{milestone.description}</p>
-                  </div>
+                  {/* Year */}
+                  <div className="text-2xl font-bold text-primary mb-2">{milestone.year}</div>
+                  
+                  {/* Card */}
+                  <Card className="shadow-card hover:shadow-elegant transition-smooth w-full max-w-[200px]">
+                    <CardContent className="p-4 text-center">
+                      <h3 className="text-sm font-semibold text-navy mb-1">{milestone.title}</h3>
+                      <p className="text-xs text-muted-foreground">{milestone.description}</p>
+                    </CardContent>
+                  </Card>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>

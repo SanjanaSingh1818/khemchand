@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageBanner from '@/components/PageBanner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -138,27 +139,10 @@ const Services = () => {
     <div ref={containerRef} className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${weldingBg})` }}
-        >
-          <div className="absolute inset-0 hero-gradient"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="hero-content max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Our Services
-              <span className="block text-railway-yellow">Excellence Delivered</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
-              Comprehensive railway infrastructure solutions backed by 30+ years of expertise and innovation.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageBanner 
+        title="OUR SERVICES" 
+        breadcrumbs={[{ label: 'OUR SERVICES', href: '' }]} 
+      />
 
       {/* Services Grid */}
       <section className="py-20">
