@@ -11,11 +11,8 @@ import {
   Search, 
   Settings, 
   AlertTriangle, 
-  Droplets,
-  ArrowRight,
-  CheckCircle
+  Droplets
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -23,61 +20,56 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
 
   const services = [
     {
       icon: Wrench,
       title: 'Concrete Sleepers',
-      description: 'Manufacturing and supply of high-quality MBC (Monoblock Concrete) sleepers for Indian Railways',
+      description: 'Manufacturing and supply of high-quality MBC sleepers for Indian Railways',
       features: ['IS:13857 Compliant', 'Pre-stressed Concrete', 'Long-lasting Durability', 'Quality Assurance'],
-      color: 'primary',
-      image: 'service-sleepers.jpg'
+      image: serviceSleepers
     },
     {
       icon: Zap,
       title: 'Flash Butt Welding',
       description: 'Advanced flash butt welding services for rail joints with precision and reliability',
       features: ['2,00,000+ Joints Completed', 'IS:2825 Standards', 'Quality Testing', 'On-site Services'],
-      color: 'accent',
-      image: 'service-welding.jpg'
+      image: serviceWelding
     },
     {
       icon: Search,
       title: 'USFD Testing of Rails/Welds',
       description: 'Ultrasonic flaw detection testing ensuring the integrity of rails and welded joints',
       features: ['40,000+ Tkm Tested', 'Non-destructive Testing', 'Detailed Reporting', 'Expert Analysis'],
-      color: 'secondary',
-      image: 'service-testing.jpg'
+      image: serviceTesting
     },
     {
       icon: Settings,
       title: 'Reconditioning of CMS Crossing',
       description: 'Complete reconditioning and maintenance of Cast Manganese Steel crossings',
       features: ['Extended Life Cycle', 'Cost-effective Solution', 'Quality Restoration', 'Performance Testing'],
-      color: 'navy',
-      image: 'service-crossing.jpg'
+      image: serviceCrossing
     },
     {
       icon: AlertTriangle,
       title: 'Broken Rail Detection (BRD)',
       description: 'Advanced systems for early detection and prevention of rail breaks',
       features: ['Early Warning System', 'Real-time Monitoring', 'Safety Enhancement', '24/7 Support'],
-      color: 'railway-red',
-      image: 'service-detection.jpg'
+      image: serviceDetection
     },
     {
       icon: Droplets,
       title: 'Lubrication Systems',
       description: 'Specialized lubrication systems for railway applications and maintenance',
-      features: ['Automated Systems', 'Reduced Wear', 'Cost Savings', 'Environmental Friendly'],
-      color: 'railway-yellow',
-      image: 'service-lubrication.jpg'
+      features: ['Automated Systems', 'Reduced Wear', 'Cost Savings', 'Environment Friendly'],
+      image: serviceLubrication
     }
   ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Header animation
+      // Animate header
       gsap.fromTo('.services-header', 
         { opacity: 0, y: 30 }, 
         { 
@@ -87,13 +79,12 @@ const Services = () => {
           scrollTrigger: {
             trigger: '.services-header',
             start: 'top 80%',
-            end: 'bottom 20%',
             toggleActions: 'play none none reverse'
           }
         }
       );
 
-      // Service cards animation
+      // Animate service cards
       gsap.fromTo('.service-card',
         { opacity: 0, y: 50 },
         {
@@ -104,15 +95,31 @@ const Services = () => {
           scrollTrigger: {
             trigger: '.services-grid',
             start: 'top 70%',
-            end: 'bottom 30%',
             toggleActions: 'play none none reverse'
           }
         }
       );
 
-      // Hover animations for service cards
-      const serviceCards = servicesRef.current?.querySelectorAll('.service-card');
-      serviceCards?.forEach(card => {
+      // Particle animation
+      const particles = particlesRef.current?.querySelectorAll('.particle');
+      particles?.forEach(particle => {
+        const xDist = Math.random() * 100 - 50; // random x movement
+        const yDist = Math.random() * 200 + 100; // random y movement
+        gsap.to(particle, {
+          x: xDist,
+          y: -yDist,
+          opacity: 0,
+          duration: Math.random() * 15 + 10,
+          repeat: -1,
+          yoyo: false,
+          ease: 'sine.inOut',
+          delay: Math.random() * 5
+        });
+      });
+
+      // Card hover animations
+      const cards = servicesRef.current?.querySelectorAll('.service-card');
+      cards?.forEach(card => {
         card.addEventListener('mouseenter', () => {
           gsap.to(card, { y: -10, duration: 0.3, ease: 'power2.out' });
         });
@@ -127,9 +134,17 @@ const Services = () => {
 
   return (
     <section ref={servicesRef} id="services" className="py-20 bg-background relative overflow-hidden">
-      {/* Floating Bubbles Background */}
-      <div className="floating-bubbles absolute inset-0 pointer-events-none"></div>
-      
+      {/* Floating Particles Background */}
+      <div ref={particlesRef} className="absolute inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div 
+            key={i} 
+            className="particle absolute w-3 h-3 rounded-full bg-primary/30"
+            style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` }}
+          />
+        ))}
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="services-header text-center mb-16">
@@ -145,58 +160,45 @@ const Services = () => {
 
         {/* Services Grid */}
         <div className="services-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {services.map((service, index) => {
-            const serviceImages = [serviceSleepers, serviceWelding, serviceTesting, serviceCrossing, serviceDetection, serviceLubrication];
-            return (
-              <div
-                key={service.title}
-                className="service-card bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-elegant transition-smooth group cursor-pointer"
-              >
-                {/* Service Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={serviceImages[index]} 
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <div className="inline-flex p-3 rounded-xl bg-white/90 backdrop-blur-sm">
-                      <service.icon className="h-6 w-6 text-primary" />
-                    </div>
+          {services.map((service) => (
+            <div
+              key={service.title}
+              className="service-card bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-elegant transition-smooth group cursor-pointer relative"
+            >
+              {/* Service Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <div className="inline-flex p-3 rounded-xl bg-white/90 backdrop-blur-sm">
+                    <service.icon className="h-6 w-6 text-primary" />
                   </div>
                 </div>
-
-                {/* Service Content */}
-                <div className="p-8">
-                  <h3 className="text-2xl font-semibold text-navy mb-4 group-hover:text-primary transition-smooth">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  
-                  <ul className="space-y-3 mb-8">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center space-x-3">
-                        <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </div>
               </div>
-            );
-          })}
+
+              {/* Service Content */}
+              <div className="p-8">
+                <h3 className="text-2xl font-semibold text-navy mb-4 group-hover:text-primary transition-smooth">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+                <ul className="space-y-3">
+                  {service.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="flex items-center space-x-3">
+                      <span className="h-5 w-5 text-primary flex-shrink-0">✔️</span>
+                      <span className="text-sm text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* New Horizons Section */}
@@ -209,13 +211,15 @@ const Services = () => {
             challenges of railway infrastructure development.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg">
-              Explore Innovation
-            </Button>
-            <Button variant="outline" size="lg">
-              Partner with Us
-            </Button>
-          </div>
+
+  <a 
+    href="/contact" 
+    className="px-6 py-3 bg-railway-red text-white rounded-xl font-semibold hover:bg-red-600 transition-colors"
+  >
+    Reach Us Now
+  </a>
+</div>
+
         </div>
       </div>
     </section>

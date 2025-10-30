@@ -10,7 +10,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import khemchandLogo from '@/assets/khemchand-logo.png';
+import khemchandLogo from '@/assets/logo.png';
 import railwayBg from '@/assets/railway-hero-bg.jpg';
 
 const Footer = () => {
@@ -19,7 +19,6 @@ const Footer = () => {
   const quickLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'Our Services', href: '#services' },
-    { name: 'Projects', href: '#projects' },
     { name: 'Leadership', href: '#leadership' },
     { name: 'Careers', href: '#careers' },
     { name: 'Contact Us', href: '#contact' }
@@ -138,16 +137,16 @@ const Footer = () => {
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 text-railway-yellow mt-1 flex-shrink-0" />
                   <div className="text-white/80">
-                    <p>123 Railway Engineering Complex</p>
-                    <p>New Delhi - 110001, India</p>
+                    <p> Ramapura Luxa, Varanasi, </p>
+                    <p>Uttar Pradesh - 221010, India</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center space-x-3">
                   <Phone className="h-5 w-5 text-railway-yellow flex-shrink-0" />
                   <div className="text-white/80">
-                    <p>+91 11 2345 6789</p>
-                    <p>+91 98765 43210</p>
+                    <p>+91-5422400225</p>
+                    {/* <p>+91 98765 43210</p> */}
                   </div>
                 </div>
                 
@@ -155,14 +154,14 @@ const Footer = () => {
                   <Mail className="h-5 w-5 text-railway-yellow flex-shrink-0" />
                   <div className="text-white/80">
                     <p>info@khemchandgroup.com</p>
-                    <p>projects@khemchandgroup.com</p>
+        
                   </div>
                 </div>
               </div>
 
               {/* Download Button */}
               <div className="mt-6">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-navy">
+                <Button variant="outline" className="border-white text-navy hover:bg-white hover:text-navy">
                   <Download className="mr-2 h-4 w-4" />
                   Company Profile
                 </Button>

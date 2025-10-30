@@ -96,19 +96,19 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Visit Our Office',
-      details: ['123 Railway Engineering Complex', 'New Delhi - 110001', 'India'],
+      details: ['Ramapura Luxa, Varanasi,', 'Uttar Pradesh - 221010, India'],
       color: 'primary'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+91 11 2345 6789', '+91 98765 43210', 'Mon-Sat: 9:00 AM - 6:00 PM'],
+      details: ['+91-5422400225', 'Mon-Sat: 12:00 PM - 8:00 PM'],
       color: 'secondary'
     },
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['info@khemchandgroup.com', 'projects@khemchandgroup.com', 'careers@khemchandgroup.com'],
+      details: ['info@khemchandgroup.com'],
       color: 'accent'
     }
   ];
@@ -310,7 +310,7 @@ const Contact = () => {
 
 
         {/* Map Section */}
-        <div className="bg-white rounded-3xl p-8 shadow-elegant">
+        {/* <div className="bg-white rounded-3xl p-8 shadow-elegant">
           <h3 className="text-2xl font-semibold text-navy mb-6 text-center">Find Us</h3>
           <div className="bg-muted/30 rounded-2xl h-96 flex items-center justify-center">
             <div className="text-center">
@@ -322,7 +322,7 @@ const Contact = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

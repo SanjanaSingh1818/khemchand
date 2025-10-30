@@ -19,10 +19,10 @@ import {
   Calendar
 } from 'lucide-react';
 import railwayBg from '@/assets/railway-hero-bg.jpg';
-import leader1 from '@/assets/leader-1.jpg';
-import leader2 from '@/assets/leader-2.jpg';
-import leader3 from '@/assets/leader-3.jpg';
-import leader4 from '@/assets/leader-4.jpg';
+import leader1 from '@/assets/leader1.jpg';
+import leader2 from '@/assets/leader2.jpg';
+// import leader3 from '@/assets/leader-3.jpg';
+// import leader4 from '@/assets/leader-4.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,7 +76,7 @@ const Leadership = () => {
     {
       id: 1,
       name: 'Mr. S. Kumar',
-      designation: 'Founder & Chairman',
+      designation: 'Director',
       education: 'B.Tech, IIT Kanpur (1975)',
       experience: '45+ Years',
       expertise: ['Railway Infrastructure', 'Engineering Management', 'Strategic Planning', 'Quality Systems'],
@@ -96,7 +96,7 @@ const Leadership = () => {
     {
       id: 2,
       name: 'Mr. Sandeep Sukhwani',
-      designation: 'Director & CEO',
+      designation: 'Director',
       education: 'MBA, United Kingdom',
       experience: '20+ Years',
       expertise: ['International Business', 'Strategic Growth', 'Operations Management', 'Technology Innovation'],
@@ -113,46 +113,46 @@ const Leadership = () => {
         phone: '+91-XXX-XXX-XXXX'
       }
     },
-    {
-      id: 3,
-      name: 'Er. Rajesh Mehta',
-      designation: 'Chief Technical Officer',
-      education: 'M.Tech, Civil Engineering',
-      experience: '25+ Years',
-      expertise: ['Railway Engineering', 'Project Management', 'Quality Assurance', 'Safety Systems'],
-      avatar: leader3,
-      bio: 'A seasoned railway engineer with deep technical expertise in all aspects of railway infrastructure. His leadership in technical operations ensures that all projects meet the highest standards of quality and safety.',
-      achievements: [
-        'Led major railway projects',
-        'Developed safety protocols',
-        'Mentored engineering teams',
-        'Established technical standards'
-      ],
-      contact: {
-        email: 'rajesh.mehta@khemchandgroup.com',
-        phone: '+91-XXX-XXX-XXXX'
-      }
-    },
-    {
-      id: 4,
-      name: 'Ms. Priya Sharma',
-      designation: 'Chief Financial Officer',
-      education: 'CA, MBA Finance',
-      experience: '18+ Years',
-      expertise: ['Financial Planning', 'Risk Management', 'Corporate Governance', 'Strategic Analysis'],
-      avatar: leader4,
-      bio: 'A dynamic financial leader who ensures robust financial management and strategic planning. Her expertise in corporate finance and risk management has been instrumental in the company\'s sustained growth.',
-      achievements: [
-        'Streamlined financial operations',
-        'Implemented cost optimization',
-        'Enhanced investor relations',
-        'Established governance frameworks'
-      ],
-      contact: {
-        email: 'priya.sharma@khemchandgroup.com',
-        phone: '+91-XXX-XXX-XXXX'
-      }
-    }
+    // {
+    //   id: 3,
+    //   name: 'Er. Rajesh Mehta',
+    //   designation: 'Chief Technical Officer',
+    //   education: 'M.Tech, Civil Engineering',
+    //   experience: '25+ Years',
+    //   expertise: ['Railway Engineering', 'Project Management', 'Quality Assurance', 'Safety Systems'],
+    //   avatar: leader3,
+    //   bio: 'A seasoned railway engineer with deep technical expertise in all aspects of railway infrastructure. His leadership in technical operations ensures that all projects meet the highest standards of quality and safety.',
+    //   achievements: [
+    //     'Led major railway projects',
+    //     'Developed safety protocols',
+    //     'Mentored engineering teams',
+    //     'Established technical standards'
+    //   ],
+    //   contact: {
+    //     email: 'rajesh.mehta@khemchandgroup.com',
+    //     phone: '+91-XXX-XXX-XXXX'
+    //   }
+    // },
+    // {
+    //   id: 4,
+    //   name: 'Ms. Priya Sharma',
+    //   designation: 'Chief Financial Officer',
+    //   education: 'CA, MBA Finance',
+    //   experience: '18+ Years',
+    //   expertise: ['Financial Planning', 'Risk Management', 'Corporate Governance', 'Strategic Analysis'],
+    //   avatar: leader4,
+    //   bio: 'A dynamic financial leader who ensures robust financial management and strategic planning. Her expertise in corporate finance and risk management has been instrumental in the company\'s sustained growth.',
+    //   achievements: [
+    //     'Streamlined financial operations',
+    //     'Implemented cost optimization',
+    //     'Enhanced investor relations',
+    //     'Established governance frameworks'
+    //   ],
+    //   contact: {
+    //     email: 'priya.sharma@khemchandgroup.com',
+    //     phone: '+91-XXX-XXX-XXXX'
+    //   }
+    // }
   ];
 
   return (
@@ -228,7 +228,7 @@ const Leadership = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy mb-4">Meet Our Leaders</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              The experienced professionals who guide our vision and drive our success
+            The Company is managed by group of family members with retired loyal Railway Officers.
             </p>
           </div>
 

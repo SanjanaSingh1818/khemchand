@@ -73,8 +73,9 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <section ref={testimonialsRef} className="py-20 bg-background">
+    <section ref={testimonialsRef} className="py-20 bg-muted/10 relative">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="testimonials-header text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
             What Our Clients Say
@@ -85,12 +86,10 @@ const Testimonials = () => {
           <div className="w-24 h-1 railway-gradient mx-auto rounded-full mt-6"></div>
         </div>
 
-        <div className="max-w-5xl mx-auto">
+        {/* Carousel */}
+        <div className="max-w-5xl mx-auto relative">
           <Carousel
-            opts={{
-              align: 'start',
-              loop: true,
-            }}
+            opts={{ align: 'start', loop: true }}
             plugins={[autoplayPlugin.current]}
             className="w-full"
             onMouseEnter={() => autoplayPlugin.current.stop()}
@@ -99,21 +98,21 @@ const Testimonials = () => {
             <CarouselContent>
               {testimonials.map((testimonial, index) => (
                 <CarouselItem key={index}>
-                  <div className="bg-gradient-to-br from-white to-muted/20 rounded-3xl p-12 shadow-elegant relative">
+                  <div className="bg-white dark:bg-navy/90 rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-shadow duration-500 relative overflow-hidden">
                     <Quote className="h-16 w-16 text-primary/20 absolute top-8 left-8" />
-                    
+
                     <div className="relative z-10">
                       <p className="text-xl text-muted-foreground italic leading-relaxed mb-8 pl-12">
                         "{testimonial.message}"
                       </p>
-                      
-                      <div className="flex items-center justify-between border-t border-muted pt-6">
+
+                      <div className="flex flex-col md:flex-row md:items-center justify-between border-t border-muted pt-6 gap-4 md:gap-0">
                         <div>
                           <h4 className="text-2xl font-semibold text-navy">{testimonial.name}</h4>
                           <p className="text-muted-foreground">{testimonial.designation}</p>
                         </div>
                         <div className="text-right">
-                          <div className="inline-flex px-6 py-2 rounded-full bg-primary/10">
+                          <div className="inline-flex px-6 py-2 rounded-full bg-primary/10 backdrop-blur-sm">
                             <span className="text-primary font-semibold">{testimonial.zone}</span>
                           </div>
                         </div>
@@ -123,8 +122,14 @@ const Testimonials = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-0 -translate-x-12" />
-            <CarouselNext className="right-0 translate-x-12" />
+
+            {/* Navigation Arrows */}
+            <CarouselPrevious className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-6 p-3 bg-white rounded-full shadow-md hover:shadow-xl transition-shadow z-20">
+              ‹
+            </CarouselPrevious>
+            <CarouselNext className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-6 p-3 bg-white rounded-full shadow-md hover:shadow-xl transition-shadow z-20">
+              ›
+            </CarouselNext>
           </Carousel>
         </div>
       </div>

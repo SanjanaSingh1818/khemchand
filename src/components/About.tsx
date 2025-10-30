@@ -10,6 +10,7 @@ const About = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Animate header
       gsap.fromTo('.about-header', 
         { opacity: 0, y: 30 }, 
         { 
@@ -24,6 +25,7 @@ const About = () => {
         }
       );
 
+      // Animate cards
       gsap.fromTo('.about-card',
         { opacity: 0, y: 50 },
         {
@@ -38,27 +40,48 @@ const About = () => {
           }
         }
       );
+
+      // Floating particles
+      gsap.to('.floating-particle', {
+        y: -20,
+        x: 15,
+        duration: 4,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.3
+      });
     }, aboutRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={aboutRef} id="about" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section ref={aboutRef} id="about" className="relative py-20 bg-muted/20 overflow-hidden">
+      {/* Floating Particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="floating-particle absolute top-10 left-[5%] w-2 h-2 bg-primary/40 rounded-full"></div>
+        <div className="floating-particle absolute top-32 left-[25%] w-3 h-3 bg-secondary/30 rounded-full"></div>
+        <div className="floating-particle absolute top-48 right-[15%] w-2 h-2 bg-accent/40 rounded-full"></div>
+        <div className="floating-particle absolute bottom-32 left-[20%] w-3 h-3 bg-white/20 rounded-full"></div>
+        <div className="floating-particle absolute bottom-48 right-[25%] w-2 h-2 bg-white/30 rounded-full"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="about-header text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6 relative z-10">
             About Khemchand Group
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto relative z-10">
             Three decades of engineering excellence, building the future of Indian Railways 
             with innovation, precision, and unwavering commitment to quality.
           </p>
-          <div className="w-24 h-1 railway-gradient mx-auto rounded-full mt-6"></div>
+          <div className="w-24 h-1 railway-gradient mx-auto rounded-full mt-6 relative z-10"></div>
         </div>
 
         <div className="about-grid grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="about-card bg-white rounded-2xl p-8 shadow-card hover:shadow-elegant transition-smooth group">
+          {/* Card 1 */}
+          <div className="about-card bg-white rounded-2xl p-8 shadow-card hover:shadow-elegant transition-smooth group relative z-10">
             <div className="inline-flex p-4 rounded-xl bg-primary/10 mb-6 group-hover:scale-110 transition-transform">
               <Target className="h-10 w-10 text-primary" />
             </div>
@@ -70,7 +93,8 @@ const About = () => {
             </p>
           </div>
 
-          <div className="about-card bg-white rounded-2xl p-8 shadow-card hover:shadow-elegant transition-smooth group">
+          {/* Card 2 */}
+          <div className="about-card bg-white rounded-2xl p-8 shadow-card hover:shadow-elegant transition-smooth group relative z-10">
             <div className="inline-flex p-4 rounded-xl bg-secondary/10 mb-6 group-hover:scale-110 transition-transform">
               <Eye className="h-10 w-10 text-secondary" />
             </div>
@@ -82,7 +106,8 @@ const About = () => {
             </p>
           </div>
 
-          <div className="about-card bg-white rounded-2xl p-8 shadow-card hover:shadow-elegant transition-smooth group">
+          {/* Card 3 */}
+          <div className="about-card bg-white rounded-2xl p-8 shadow-card hover:shadow-elegant transition-smooth group relative z-10">
             <div className="inline-flex p-4 rounded-xl bg-accent/10 mb-6 group-hover:scale-110 transition-transform">
               <Flag className="h-10 w-10 text-accent" />
             </div>

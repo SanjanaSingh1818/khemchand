@@ -506,7 +506,7 @@ const Careers = () => {
                   careers@khemchandgroup.com
                 </Button>
               </a>
-              <a href="tel:+911123456789" className="inline-block">
+              <a href="tel:+917084161512" className="inline-block">
                 <Button variant="outline" size="lg">
                   <Phone className="w-5 h-5 mr-2" />
                   Contact HR

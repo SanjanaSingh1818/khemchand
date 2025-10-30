@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Link } from 'react-router-dom';
 import { Label } from '@/components/ui/label';
 import { 
   MapPin, 
@@ -114,20 +115,17 @@ const ContactUs = () => {
       icon: <MapPin className="w-6 h-6" />,
       title: 'Head Office',
       details: [
-        'Khemchand Group',
-        'Plot No. 123, Industrial Area',
-        'New Delhi - 110001',
-        'India'
+        'Ramapura Luxa, Varanasi, Uttar Pradesh 221010'
       ]
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: 'Phone Numbers',
       details: [
-        '+91-11-XXXX-XXXX (Main)',
-        '+91-11-XXXX-XXXX (Sales)',
-        '+91-11-XXXX-XXXX (Support)',
-        '1800-XXX-XXXX (Toll Free)'
+        '+91-5422400225',
+        // '+91-11-XXXX-XXXX (Sales)',
+        // '+91-11-XXXX-XXXX (Support)',
+        // '1800-XXX-XXXX (Toll Free)'
       ]
     },
     {
@@ -135,19 +133,19 @@ const ContactUs = () => {
       title: 'Email Addresses',
       details: [
         'info@khemchandgroup.com',
-        'sales@khemchandgroup.com',
-        'careers@khemchandgroup.com',
-        'support@khemchandgroup.com'
+        // 'sales@khemchandgroup.com',
+        // 'careers@khemchandgroup.com',
+        // 'support@khemchandgroup.com'
       ]
     },
     {
       icon: <Clock className="w-6 h-6" />,
       title: 'Business Hours',
       details: [
-        'Monday - Friday: 9:00 AM - 6:00 PM',
-        'Saturday: 9:00 AM - 1:00 PM',
+        'Monday - Saturday: 12:00 PM - 8:00 PM',
+        // 'Saturday: 12:00 AM - 1:00 PM',
         'Sunday: Closed',
-        'Emergency: 24/7 Available'
+        
       ]
     }
   ];
@@ -334,30 +332,28 @@ const ContactUs = () => {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-navy mb-4">Find Us</h2>
-            <p className="text-xl text-muted-foreground">Located in the heart of Delhi's industrial area</p>
-          </div>
+<section className="py-20 bg-muted">
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-12">
+      <h2 className="text-4xl font-bold text-navy mb-4">Find Us</h2>
+      <p className="text-xl text-muted-foreground">
+        Located in the heart of Delhi's industrial area
+      </p>
+    </div>
 
-          <Card className="shadow-elegant overflow-hidden">
-            <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-navy mb-2">Interactive Map</h3>
-                <p className="text-muted-foreground mb-4">
-                  Khemchand Group Head Office<br />
-                  Industrial Area, New Delhi
-                </p>
-                <Button variant="hero">
-                  View on Google Maps
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
+    <Card className="shadow-elegant overflow-hidden rounded-3xl">
+      <div className="w-full h-[70vh] md:h-[60vh]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.8833094786414!2d82.99711977484104!3d25.308124327199707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2ff222937589%3A0xe0a60154a1a717cd!2sKhemchand%20Group!5e0!3m2!1sen!2sin!4v1760734119500!5m2!1sen!2sin"
+          className="w-full h-full border-0"
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </Card>
+  </div>
+</section>
 
       {/* Railway Track Footer */}
       <div className="relative py-8 railway-gradient">
@@ -366,14 +362,18 @@ const ContactUs = () => {
           <p className="text-white/90 mb-6">
             Let's discuss how we can help build your railway infrastructure vision
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="accent" size="lg">
-              Request Quote
-            </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-navy">
-              Schedule Meeting
-            </Button>
-          </div>
+         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+  <Link to="/contact">
+    <Button variant="accent" size="lg">
+      Request Quote
+    </Button>
+  </Link>
+  <Link to="/contact">
+    <Button variant="outline" size="lg" className="border-white text-red-500 hover:bg-white hover:text-navy">
+      Schedule Meeting
+    </Button>
+  </Link>
+</div>
         </div>
       </div>
 

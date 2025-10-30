@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Phone, Mail, Linkedin, Instagram } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import khemchandLogo from '@/assets/khemchand-logo.png';
+import khemchandLogo from '@/assets/logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +12,6 @@ const Header = () => {
     { name: 'HOME', href: '/' },
     { name: 'ABOUT US', href: '/about' },
     { name: 'SERVICES', href: '/services' },
-    { name: 'PROJECTS', href: '/projects' },
     { name: 'LEADERSHIP', href: '/leadership' },
     { name: 'CAREERS', href: '/careers' },
     { name: 'CONTACT US', href: '/contact' },
@@ -24,11 +23,11 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-white shadow-md">
       {/* Top Info Bar */}
       <div className="bg-white border-b border-border/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2">
           <div className="flex items-center justify-between py-3">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img src={khemchandLogo} alt="Khemchand Group" className="h-14 w-auto" />
+              <img src={khemchandLogo} alt="Khemchand Group" className="h-16 w-auto" />
             </Link>
 
             {/* Right Section - Inquiry, Social, Email */}
@@ -36,10 +35,11 @@ const Header = () => {
               {/* Inquiry */}
               <div className="flex items-center space-x-2">
                 <Phone className="h-5 w-5 text-primary" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-muted-foreground">Inquiry</span>
-                  <span className="text-sm font-semibold text-foreground">+91-XXXXXXXXXX</span>
-                </div>
+                <a href="tel:+915422400225" className="flex flex-col">
+  <span className="text-xs text-muted-foreground">Inquiry</span>
+  <span className="text-sm font-semibold text-foreground hover:text-primary transition-colors">+91-5422400225</span>
+</a>
+
               </div>
 
               {/* Social Icons */}
@@ -58,13 +58,19 @@ const Header = () => {
               </div>
 
               {/* Email */}
-              <div className="flex items-center space-x-2">
-                <Mail className="h-5 w-5 text-primary" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-muted-foreground">Mail Us</span>
-                  <span className="text-sm font-semibold text-foreground">info@khemchandgroup.com</span>
-                </div>
-              </div>
+             <div className="flex items-center space-x-2">
+  <Mail className="h-5 w-5 text-primary" />
+  <div className="flex flex-col">
+    <span className="text-xs text-muted-foreground">Mail Us</span>
+    <a
+      href="mailto:info@khemchandgroup.com"
+      className="text-sm font-semibold text-foreground hover:text-primary transition-colors"
+    >
+      info@khemchandgroup.com
+    </a>
+  </div>
+</div>
+
             </div>
 
             {/* Mobile Menu Button */}
@@ -101,14 +107,18 @@ const Header = () => {
             </nav>
 
             {/* Enquire Now Button */}
-            <div className="hidden lg:block py-2">
-              <Button 
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-navy font-semibold px-5 py-2 h-auto"
-              >
-                Enquire Now
-              </Button>
-            </div>
+<div className="hidden lg:block py-2">
+  <a href="#contact" className="inline-block">
+    <Button 
+      variant="outline"
+      className="bg-red-600 text-white border-2 border-red-600 font-semibold px-5 py-2 h-auto hover:bg-white hover:text-red-600 transition-colors duration-300"
+    >
+      Enquire Now
+    </Button>
+  </a>
+</div>
+
+
           </div>
         </div>
       </div>
