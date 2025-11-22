@@ -35,8 +35,8 @@ All colors MUST be HSL. Brand colors from logo: green, teal, navy, orange, red, 
     --accent-foreground: 0 0% 100%;
 
     /* Railway Navy #01054d - Dark Navy */
-    --navy: 236 98% 15%;
-    --navy-foreground: 0 0% 100%;
+--navy: 236 98% 15%; 
+--navy-foreground: 0 0% 100%;
 
     /* Banner Navy #022a61 */
     --banner-navy: 213 96% 19%;

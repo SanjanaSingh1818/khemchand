@@ -7,12 +7,12 @@ import PageBanner from '@/components/PageBanner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Settings, 
-  Zap, 
-  Search, 
-  RefreshCw, 
-  AlertTriangle, 
+import {
+  Settings,
+  Zap,
+  Search,
+  RefreshCw,
+  AlertTriangle,
   Droplets,
   Train,
   ChevronRight,
@@ -25,17 +25,35 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
+  // ✅ Dynamically calculate header height
+  useEffect(() => {
+    const header = document.getElementById('main-header');
+    if (!header) return;
+
+    const updateHeight = () => setHeaderHeight(header.offsetHeight);
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(header);
+
+    window.addEventListener('resize', updateHeight);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateHeight);
+    };
+  }, []);
+
+  // ✅ GSAP animations
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation
-      gsap.fromTo('.hero-content', 
+      gsap.fromTo('.hero-content',
         { opacity: 0, y: 100 },
         { opacity: 1, y: 0, duration: 1, delay: 0.3 }
       );
 
-      // Service cards animation
       gsap.fromTo('.service-card',
         { opacity: 0, y: 50, scale: 0.9 },
         {
@@ -51,7 +69,6 @@ const Services = () => {
         }
       );
 
-      // Railway track separator
       gsap.fromTo('.track-separator',
         { scaleX: 0 },
         {
@@ -63,7 +80,6 @@ const Services = () => {
           }
         }
       );
-
     }, containerRef);
 
     return () => ctx.revert();
@@ -136,15 +152,19 @@ const Services = () => {
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen">
-      <Header />
-      
-      <PageBanner 
-        title="OUR SERVICES" 
-        breadcrumbs={[{ label: 'OUR SERVICES', href: '' }]} 
-      />
+    <div ref={containerRef} className="min-h-screen bg-white">
+      {/* ✅ Fixed Header */}
+      <Header id="main-header" />
 
-      {/* Services Grid */}
+      {/* ✅ PageBanner with proper space below header */}
+      <div style={{ marginTop: `${headerHeight}px` }}>
+        <PageBanner
+          title="OUR SERVICES"
+          breadcrumbs={[{ label: 'OUR SERVICES', href: '' }]}
+        />
+      </div>
+
+      {/* ✅ Services Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -156,15 +176,13 @@ const Services = () => {
 
           <div className="services-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card 
+              <Card
                 key={index}
-                className={`service-card group cursor-pointer transition-all duration-500 hover:shadow-elegant ${
-                  expandedCard === index ? 'lg:col-span-2 lg:row-span-2' : ''
-                }`}
+                className={`service-card group cursor-pointer transition-all duration-500 hover:shadow-elegant ${expandedCard === index ? 'lg:col-span-2 lg:row-span-2' : ''}`}
                 onClick={() => setExpandedCard(expandedCard === index ? null : index)}
               >
                 <CardHeader className="relative overflow-hidden">
-                  <div 
+                  <div
                     className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity"
                     style={{ backgroundImage: `url(${service.image})` }}
                   ></div>
@@ -182,8 +200,8 @@ const Services = () => {
 
                 <CardContent className="relative z-10">
                   <p className="text-muted-foreground mb-4">{service.description}</p>
-                  
-                  {expandedCard === index && (
+
+                  {expandedCard === index ? (
                     <div className="mt-6 space-y-4">
                       <h4 className="font-semibold text-navy">Key Features:</h4>
                       <div className="grid grid-cols-2 gap-2">
@@ -198,9 +216,7 @@ const Services = () => {
                         Learn More <ChevronRight className="w-4 h-4 ml-2" />
                       </Button>
                     </div>
-                  )}
-                  
-                  {expandedCard !== index && (
+                  ) : (
                     <div className="flex items-center justify-between mt-4">
                       <span className="text-sm text-muted-foreground">Click to expand</span>
                       <ChevronRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
@@ -213,7 +229,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Railway Track Separator */}
+      {/* ✅ Railway Track Separator */}
       <div className="relative py-8">
         <div className="track-separator w-full h-1 railway-gradient origin-left"></div>
         <div className="absolute inset-0 flex items-center justify-center">
@@ -223,7 +239,7 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
+      {/* ✅ Call to Action */}
       <section className="py-20 railway-gradient">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Start Your Project?</h2>
@@ -232,9 +248,7 @@ const Services = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="accent" size="xl">Get Quote</Button>
-            <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-navy">
-              Download Brochure
-            </Button>
+           
           </div>
         </div>
       </section>

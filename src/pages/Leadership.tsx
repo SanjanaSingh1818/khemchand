@@ -7,16 +7,14 @@ import PageBanner from '@/components/PageBanner';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  GraduationCap, 
-  Building, 
-  Award, 
+import {
+  GraduationCap,
+  Building,
+  Award,
   Users,
   Mail,
-  Phone,
   Linkedin,
-  MapPin,
-  Calendar
+  Calendar,
 } from 'lucide-react';
 import railwayBg from '@/assets/railway-hero-bg.jpg';
 import leader1 from '@/assets/leader1.jpg';
@@ -29,17 +27,39 @@ gsap.registerPlugin(ScrollTrigger);
 const Leadership = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [flippedCard, setFlippedCard] = useState<number | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
+  // ✅ Dynamically measure header height
+  useEffect(() => {
+    const header = document.getElementById('main-header');
+    if (!header) return;
+
+    const updateHeight = () => setHeaderHeight(header.offsetHeight);
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(header);
+
+    window.addEventListener('resize', updateHeight);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateHeight);
+    };
+  }, []);
+
+  // ✅ GSAP animations
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation
-      gsap.fromTo('.hero-content', 
+      gsap.fromTo(
+        '.hero-content',
         { opacity: 0, y: 100 },
         { opacity: 1, y: 0, duration: 1, delay: 0.3 }
       );
 
       // Leadership cards animation
-      gsap.fromTo('.leadership-card',
+      gsap.fromTo(
+        '.leadership-card',
         { opacity: 0, y: 50, rotationY: -15 },
         {
           opacity: 1,
@@ -50,12 +70,13 @@ const Leadership = () => {
           scrollTrigger: {
             trigger: '.leadership-grid',
             start: 'top 80%',
-          }
+          },
         }
       );
 
       // Railway track divider animation
-      gsap.fromTo('.track-divider',
+      gsap.fromTo(
+        '.track-divider',
         { scaleX: 0 },
         {
           scaleX: 1,
@@ -63,10 +84,9 @@ const Leadership = () => {
           scrollTrigger: {
             trigger: '.track-divider',
             start: 'top 90%',
-          }
+          },
         }
       );
-
     }, containerRef);
 
     return () => ctx.revert();
@@ -79,19 +99,23 @@ const Leadership = () => {
       designation: 'Director',
       education: 'B.Tech, IIT Kanpur (1975)',
       experience: '45+ Years',
-      expertise: ['Railway Infrastructure', 'Engineering Management', 'Strategic Planning', 'Quality Systems'],
+      expertise: [
+        'Railway Infrastructure',
+        'Engineering Management',
+        'Strategic Planning',
+        'Quality Systems',
+      ],
       avatar: leader1,
-      bio: 'A visionary leader and IIT Kanpur alumnus who founded Khemchand Group with a mission to transform India\'s railway infrastructure. His extensive experience in engineering and unwavering commitment to quality have been the driving forces behind the company\'s success over three decades.',
+      bio: "A visionary leader and IIT Kanpur alumnus who founded Khemchand Group with a mission to transform India's railway infrastructure. His extensive experience in engineering and unwavering commitment to quality have been the driving forces behind the company's success over three decades.",
       achievements: [
         'Founded Khemchand Group in 1990',
         'Pioneered flash butt welding in India',
         'Built partnerships with Indian Railways',
-        'Established quality standards in industry'
+        'Established quality standards in industry',
       ],
       contact: {
         email: 's.kumar@khemchandgroup.com',
-        phone: '+91-XXX-XXX-XXXX'
-      }
+      },
     },
     {
       id: 2,
@@ -99,112 +123,96 @@ const Leadership = () => {
       designation: 'Director',
       education: 'MBA, United Kingdom',
       experience: '20+ Years',
-      expertise: ['International Business', 'Strategic Growth', 'Operations Management', 'Technology Innovation'],
+      expertise: [
+        'International Business',
+        'Strategic Growth',
+        'Operations Management',
+        'Technology Innovation',
+      ],
       avatar: leader2,
       bio: 'An accomplished business leader with international exposure and MBA from the UK. He brings global best practices and modern management techniques to drive the company towards new horizons of growth and technological advancement.',
       achievements: [
         'Led international expansion initiatives',
         'Implemented modern quality systems',
         'Established technology partnerships',
-        'Drove digital transformation'
+        'Drove digital transformation',
       ],
       contact: {
         email: 'sandeep.sukhwani@khemchandgroup.com',
-        phone: '+91-XXX-XXX-XXXX'
-      }
+      },
     },
-    // {
-    //   id: 3,
-    //   name: 'Er. Rajesh Mehta',
-    //   designation: 'Chief Technical Officer',
-    //   education: 'M.Tech, Civil Engineering',
-    //   experience: '25+ Years',
-    //   expertise: ['Railway Engineering', 'Project Management', 'Quality Assurance', 'Safety Systems'],
-    //   avatar: leader3,
-    //   bio: 'A seasoned railway engineer with deep technical expertise in all aspects of railway infrastructure. His leadership in technical operations ensures that all projects meet the highest standards of quality and safety.',
-    //   achievements: [
-    //     'Led major railway projects',
-    //     'Developed safety protocols',
-    //     'Mentored engineering teams',
-    //     'Established technical standards'
-    //   ],
-    //   contact: {
-    //     email: 'rajesh.mehta@khemchandgroup.com',
-    //     phone: '+91-XXX-XXX-XXXX'
-    //   }
-    // },
-    // {
-    //   id: 4,
-    //   name: 'Ms. Priya Sharma',
-    //   designation: 'Chief Financial Officer',
-    //   education: 'CA, MBA Finance',
-    //   experience: '18+ Years',
-    //   expertise: ['Financial Planning', 'Risk Management', 'Corporate Governance', 'Strategic Analysis'],
-    //   avatar: leader4,
-    //   bio: 'A dynamic financial leader who ensures robust financial management and strategic planning. Her expertise in corporate finance and risk management has been instrumental in the company\'s sustained growth.',
-    //   achievements: [
-    //     'Streamlined financial operations',
-    //     'Implemented cost optimization',
-    //     'Enhanced investor relations',
-    //     'Established governance frameworks'
-    //   ],
-    //   contact: {
-    //     email: 'priya.sharma@khemchandgroup.com',
-    //     phone: '+91-XXX-XXX-XXXX'
-    //   }
-    // }
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen">
-      <Header />
-      
-      <PageBanner 
-        title="LEADERSHIP" 
-        breadcrumbs={[{ label: 'LEADERSHIP', href: '' }]} 
-      />
+    <div ref={containerRef} className="min-h-screen bg-white">
+      {/* ✅ Fixed Header */}
+      <Header id="main-header" />
 
-      {/* Leadership Legacy */}
+      {/* ✅ PageBanner properly offset below Header */}
+      <div className="relative" style={{ marginTop: `${headerHeight}px` }}>
+        <PageBanner
+          title="LEADERSHIP"
+          breadcrumbs={[{ label: 'LEADERSHIP', href: '' }]}
+        />
+      </div>
+
+      {/* ✅ Leadership Legacy */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-navy mb-6">Leadership Legacy</h2>
+            <h2 className="text-4xl font-bold text-navy mb-6">
+              Leadership Legacy
+            </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              From humble beginnings to becoming a trusted partner of Indian Railways, 
-              our leadership team combines decades of experience with a vision for the future. 
-              Founded by Mr. S. Kumar, an IIT Kanpur alumnus, and strengthened by 
-              Mr. Sandeep Sukhwani's international expertise, we continue to set new standards 
-              in railway infrastructure excellence.
+              From humble beginnings to becoming a trusted partner of Indian
+              Railways, our leadership team combines decades of experience with
+              a vision for the future. Founded by Mr. S. Kumar, an IIT Kanpur
+              alumnus, and strengthened by Mr. Sandeep Sukhwani's international
+              expertise, we continue to set new standards in railway
+              infrastructure excellence.
             </p>
-            
+
             <div className="grid md:grid-cols-3 gap-8 mt-12">
               <Card className="shadow-card">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 railway-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                     <GraduationCap className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-navy mb-2">Academic Excellence</h3>
-                  <p className="text-muted-foreground">IIT Kanpur heritage combined with international MBA expertise</p>
+                  <h3 className="text-xl font-bold text-navy mb-2">
+                    Academic Excellence
+                  </h3>
+                  <p className="text-muted-foreground">
+                    IIT Kanpur heritage combined with international MBA
+                    expertise
+                  </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="shadow-card">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 railway-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                     <Building className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-navy mb-2">Industry Experience</h3>
-                  <p className="text-muted-foreground">Combined 100+ years of railway and engineering experience</p>
+                  <h3 className="text-xl font-bold text-navy mb-2">
+                    Industry Experience
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Combined 100+ years of railway and engineering experience
+                  </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="shadow-card">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 railway-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                     <Award className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-navy mb-2">Proven Leadership</h3>
-                  <p className="text-muted-foreground">Successfully delivering projects for 30+ years</p>
+                  <h3 className="text-xl font-bold text-navy mb-2">
+                    Proven Leadership
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Successfully delivering projects for 30+ years
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -212,7 +220,7 @@ const Leadership = () => {
         </div>
       </section>
 
-      {/* Railway Track Divider */}
+      {/* ✅ Railway Track Divider */}
       <div className="relative py-8">
         <div className="track-divider w-full h-1 railway-gradient origin-left"></div>
         <div className="absolute inset-0 flex items-center justify-center">
@@ -222,34 +230,45 @@ const Leadership = () => {
         </div>
       </div>
 
-      {/* Leadership Team */}
+      {/* ✅ Leadership Team */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy mb-4">Meet Our Leaders</h2>
+            <h2 className="text-4xl font-bold text-navy mb-4">
+              Meet Our Leaders
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            The Company is managed by group of family members with retired loyal Railway Officers.
+              The Company is managed by group of family members with retired
+              loyal Railway Officers.
             </p>
           </div>
 
           <div className="leadership-grid grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {leaders.map((leader) => (
-              <Card 
+              <Card
                 key={leader.id}
                 className={`leadership-card group cursor-pointer transition-all duration-500 hover:shadow-elegant ${
                   flippedCard === leader.id ? 'transform-gpu' : ''
                 }`}
-                onClick={() => setFlippedCard(flippedCard === leader.id ? null : leader.id)}
+                onClick={() =>
+                  setFlippedCard(flippedCard === leader.id ? null : leader.id)
+                }
               >
                 <CardContent className="p-0 relative overflow-hidden">
-                  <div className={`transition-all duration-700 ${flippedCard === leader.id ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                    {/* Front Side */}
+                  {/* Front Side */}
+                  <div
+                    className={`transition-all duration-700 ${
+                      flippedCard === leader.id
+                        ? 'opacity-0 scale-95'
+                        : 'opacity-100 scale-100'
+                    }`}
+                  >
                     <div className="p-8">
                       <div className="flex items-start space-x-6">
                         <div className="relative">
                           <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary/20">
-                            <img 
-                              src={leader.avatar} 
+                            <img
+                              src={leader.avatar}
                               alt={leader.name}
                               className="w-full h-full object-cover"
                             />
@@ -258,11 +277,15 @@ const Leadership = () => {
                             <Award className="w-4 h-4 text-white" />
                           </div>
                         </div>
-                        
+
                         <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-navy mb-1">{leader.name}</h3>
-                          <p className="text-primary font-semibold mb-2">{leader.designation}</p>
-                          
+                          <h3 className="text-2xl font-bold text-navy mb-1">
+                            {leader.name}
+                          </h3>
+                          <p className="text-primary font-semibold mb-2">
+                            {leader.designation}
+                          </p>
+
                           <div className="space-y-2 mb-4">
                             <div className="flex items-center text-sm text-muted-foreground">
                               <GraduationCap className="w-4 h-4 mr-2" />
@@ -273,10 +296,14 @@ const Leadership = () => {
                               {leader.experience}
                             </div>
                           </div>
-                          
+
                           <div className="flex flex-wrap gap-2 mb-4">
                             {leader.expertise.slice(0, 2).map((skill, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
+                              <Badge
+                                key={idx}
+                                variant="secondary"
+                                className="text-xs"
+                              >
                                 {skill}
                               </Badge>
                             ))}
@@ -286,11 +313,11 @@ const Leadership = () => {
                               </Badge>
                             )}
                           </div>
-                          
+
                           <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
                             {leader.bio}
                           </p>
-                          
+
                           <Button variant="outline" size="sm" className="w-full">
                             View Details
                           </Button>
@@ -304,12 +331,18 @@ const Leadership = () => {
                     <div className="absolute inset-0 p-8 bg-gradient-to-br from-primary/5 to-secondary/5">
                       <div className="h-full flex flex-col">
                         <div className="mb-4">
-                          <h3 className="text-xl font-bold text-navy mb-2">{leader.name}</h3>
-                          <p className="text-primary font-medium">{leader.designation}</p>
+                          <h3 className="text-xl font-bold text-navy mb-2">
+                            {leader.name}
+                          </h3>
+                          <p className="text-primary font-medium">
+                            {leader.designation}
+                          </p>
                         </div>
-                        
+
                         <div className="mb-6">
-                          <h4 className="font-semibold text-navy mb-2">Key Achievements:</h4>
+                          <h4 className="font-semibold text-navy mb-2">
+                            Key Achievements:
+                          </h4>
                           <ul className="space-y-1 text-sm text-muted-foreground">
                             {leader.achievements.map((achievement, idx) => (
                               <li key={idx} className="flex items-start">
@@ -319,18 +352,24 @@ const Leadership = () => {
                             ))}
                           </ul>
                         </div>
-                        
+
                         <div className="mb-6">
-                          <h4 className="font-semibold text-navy mb-2">All Expertise:</h4>
+                          <h4 className="font-semibold text-navy mb-2">
+                            All Expertise:
+                          </h4>
                           <div className="flex flex-wrap gap-1">
                             {leader.expertise.map((skill, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
+                              <Badge
+                                key={idx}
+                                variant="secondary"
+                                className="text-xs"
+                              >
                                 {skill}
                               </Badge>
                             ))}
                           </div>
                         </div>
-                        
+
                         <div className="mt-auto">
                           <div className="flex items-center justify-between text-sm text-muted-foreground">
                             <div className="flex items-center">
@@ -353,13 +392,16 @@ const Leadership = () => {
         </div>
       </section>
 
-      {/* Vision Statement */}
+      {/* ✅ Vision Statement */}
       <section className="py-20 railway-gradient">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-8">Our Leadership Vision</h2>
+          <h2 className="text-4xl font-bold text-white mb-8">
+            Our Leadership Vision
+          </h2>
           <blockquote className="text-2xl text-white/90 font-light italic max-w-4xl mx-auto mb-8">
-            "To lead India's railway transformation through innovative engineering solutions, 
-            uncompromising quality, and sustainable growth that benefits all stakeholders."
+            "To lead India's railway transformation through innovative
+            engineering solutions, uncompromising quality, and sustainable
+            growth that benefits all stakeholders."
           </blockquote>
           <div className="flex justify-center items-center space-x-8 text-white/80">
             <div className="text-center">

@@ -49,7 +49,7 @@ const Footer = () => {
       ></div>
       
       {/* Reddish Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-red-900/80 to-red-800/70"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-red-900/90 to-red-800/80"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Main Footer Content */}
@@ -160,12 +160,12 @@ const Footer = () => {
               </div>
 
               {/* Download Button */}
-              <div className="mt-6">
+              {/* <div className="mt-6">
                 <Button variant="outline" className="border-white text-navy hover:bg-white hover:text-navy">
                   <Download className="mr-2 h-4 w-4" />
                   Company Profile
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -191,12 +191,9 @@ const Footer = () => {
             <div className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl p-6 max-w-2xl mx-auto">
               <h5 className="text-xl font-semibold text-railway-yellow mb-2">Precision Equipments Co.</h5>
               <p className="text-white/80 mb-4">
-                Specializing in precision machining and fabrication for ALCO & EMD Engines, 
-                Turbo Dowelling, HHP Traction Motors, and Industrial Blowers.
+                Specialization in Precision Machining and Fabrication of import Substitutes for electric & Diesel Locomotives like Turbo Dowelling, HHP Traction Motors, and Industrial Blowers. The endeavour reinforces vision “Make in India”, generating local employment and saving Foreign Exchange reserve.
               </p>
-              <Button variant="outline" size="sm" className="border-railway-yellow text-railway-yellow hover:bg-railway-yellow hover:text-navy">
-                Learn More
-              </Button>
+            
             </div>
           </div>
         </div>
